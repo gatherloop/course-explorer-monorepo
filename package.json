@@ -19,6 +19,7 @@
     "@nrwl/react": "15.5.3",
     "@nrwl/web": "15.5.3",
     "@nrwl/workspace": "15.5.3",
+    "@nx-go/nx-go": "^2.7.0",
     "@testing-library/react": "13.4.0",
     "@types/jest": "28.1.1",
     "@types/node": "18.11.9",

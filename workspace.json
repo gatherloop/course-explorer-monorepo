@@ -2,6 +2,9 @@
   "version": 2,
   "projects": {
     "cms": "apps/cms",
+    "content-api": "apps/content-api",
+    "gateway-api": "apps/gateway-api",
+    "user-api": "apps/user-api",
     "user-facing": "apps/user-facing"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"

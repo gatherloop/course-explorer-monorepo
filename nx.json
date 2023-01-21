@@ -1,15 +1,12 @@
 {
-  "npmScope": "course-explorer-monorepo",
-  "affected": {
-    "defaultBase": "main"
+  "implicitDependencies": {
+    "go.mod": "*"
   },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
-    }
+  "npmScope": "course-explorer-monorepo",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": [],
+    "production": ["default"]
   },
   "targetDefaults": {
     "build": {
@@ -19,6 +16,17 @@
     "e2e": {
       "inputs": ["default", "^production"]
     }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
   },
   "generators": {
     "@nrwl/react": {
@@ -32,11 +40,5 @@
         "linter": "eslint"
       }
     }
-  },
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": [],
-    "production": ["default"]
   }
 }

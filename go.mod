@@ -1,0 +1,1 @@
+module course-explorer-monorepo
