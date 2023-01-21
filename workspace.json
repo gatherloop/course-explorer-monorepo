@@ -1,7 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "cms": "apps/cms"
+    "cms": "apps/cms",
+    "user-facing": "apps/user-facing"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
