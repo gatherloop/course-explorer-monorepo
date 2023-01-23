@@ -1,17 +1,28 @@
+import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme';
 import { AppProps } from 'next/app';
-import Head from 'next/head';
-import './styles.css';
+import React from 'react';
+import { TamaguiProvider } from 'tamagui';
+import appConfig from '../tamagui.config';
 
 function CustomApp({ Component, pageProps }: AppProps) {
+  const [theme, setTheme] = useRootTheme();
+
+  const contents = React.useMemo(
+    () => <Component {...pageProps} />,
+    [Component, pageProps]
+  );
+
   return (
-    <>
-      <Head>
-        <title>Welcome to user-facing!</title>
-      </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
-    </>
+    <NextThemeProvider onChangeTheme={setTheme}>
+      <TamaguiProvider
+        disableInjectCSS
+        disableRootThemeClass
+        defaultTheme={theme}
+        config={appConfig}
+      >
+        {contents}
+      </TamaguiProvider>
+    </NextThemeProvider>
   );
 }
 
