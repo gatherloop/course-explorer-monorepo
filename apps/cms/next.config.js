@@ -2,6 +2,17 @@
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { withNx } = require('@nrwl/next/plugins/with-nx');
+const { withTamagui: createWithTamagui } = require('@tamagui/next-plugin');
+
+process.env.TAMAGUI_TARGET = 'web';
+
+const withTamagui = createWithTamagui({
+  config: './apps/cms/tamagui.config.ts',
+  components: ['tamagui'],
+  useReactNativeWebLite: true,
+  disableExtraction: process.env.NODE_ENV === 'development',
+  excludeReactNativeWebExports: ['Switch', 'ProgressBar', 'Picker'],
+});
 
 /**
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
@@ -14,4 +25,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withNx(nextConfig);
+module.exports = withTamagui(withNx(nextConfig));

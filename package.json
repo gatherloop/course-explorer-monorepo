@@ -47,9 +47,15 @@
     "typescript": "4.8.4"
   },
   "dependencies": {
-    "next": "13.1.1",
+    "@tamagui/config-base": "^1.0.22",
+    "@tamagui/core": "^1.0.22",
+    "@tamagui/next-plugin": "^1.0.22",
+    "@tamagui/next-theme": "^1.0.22",
+    "expo-linear-gradient": "^12.0.1",
+    "next": "^13.1.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "tamagui": "^1.0.22",
     "tslib": "^2.3.0"
   }
 }
