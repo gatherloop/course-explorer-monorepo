@@ -1,7 +1,7 @@
 {
-  "name": "user-facing",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/user-facing",
+  "name": "ui-cms",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ui/cms",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,12 +9,12 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/user-facing",
-        "outputPath": "dist/apps/user-facing"
+        "root": "apps/ui/cms",
+        "outputPath": "dist/apps/ui/cms"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/user-facing"
+          "outputPath": "apps/ui/cms"
         },
         "production": {}
       }
@@ -23,16 +23,16 @@
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "user-facing:build",
+        "buildTarget": "ui-cms:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "user-facing:build:development",
+          "buildTarget": "ui-cms:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "user-facing:build:production",
+          "buildTarget": "ui-cms:build:production",
           "dev": false
         }
       }
@@ -40,14 +40,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "user-facing:build:production"
+        "buildTarget": "ui-cms:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/user-facing/jest.config.ts",
+        "jestConfig": "apps/ui/cms/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -55,7 +55,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/user-facing/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/ui/cms/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

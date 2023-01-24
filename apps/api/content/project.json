@@ -1,20 +1,20 @@
 {
-  "name": "user-api",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "api-content",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/user-api",
+  "sourceRoot": "apps/api/content",
   "targets": {
     "build": {
       "executor": "@nx-go/nx-go:build",
       "options": {
-        "outputPath": "dist/apps/user-api",
-        "main": "apps/user-api/main.go"
+        "outputPath": "dist/apps/api/content",
+        "main": "apps/api/content/main.go"
       }
     },
     "serve": {
       "executor": "@nx-go/nx-go:serve",
       "options": {
-        "main": "apps/user-api/main.go"
+        "main": "apps/api/content/main.go"
       }
     },
     "test": {

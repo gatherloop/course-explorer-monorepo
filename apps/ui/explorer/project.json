@@ -1,7 +1,7 @@
 {
-  "name": "cms",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/cms",
+  "name": "ui-explorer",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ui/explorer",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,12 +9,12 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/cms",
-        "outputPath": "dist/apps/cms"
+        "root": "apps/ui/explorer",
+        "outputPath": "dist/apps/ui/explorer"
       },
       "configurations": {
         "development": {
-          "outputPath": "apps/cms"
+          "outputPath": "apps/ui/explorer"
         },
         "production": {}
       }
@@ -23,16 +23,16 @@
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "cms:build",
+        "buildTarget": "ui-explorer:build",
         "dev": true
       },
       "configurations": {
         "development": {
-          "buildTarget": "cms:build:development",
+          "buildTarget": "ui-explorer:build:development",
           "dev": true
         },
         "production": {
-          "buildTarget": "cms:build:production",
+          "buildTarget": "ui-explorer:build:production",
           "dev": false
         }
       }
@@ -40,14 +40,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "cms:build:production"
+        "buildTarget": "ui-explorer:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/cms/jest.config.ts",
+        "jestConfig": "apps/ui/explorer/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -55,7 +55,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/cms/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/ui/explorer/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },

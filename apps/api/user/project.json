@@ -1,20 +1,20 @@
 {
-  "name": "gateway-api",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "api-user",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/gateway-api",
+  "sourceRoot": "apps/api/user",
   "targets": {
     "build": {
       "executor": "@nx-go/nx-go:build",
       "options": {
-        "outputPath": "dist/apps/gateway-api",
-        "main": "apps/gateway-api/main.go"
+        "outputPath": "dist/apps/api/user",
+        "main": "apps/api/user/main.go"
       }
     },
     "serve": {
       "executor": "@nx-go/nx-go:serve",
       "options": {
-        "main": "apps/gateway-api/main.go"
+        "main": "apps/api/user/main.go"
       }
     },
     "test": {
