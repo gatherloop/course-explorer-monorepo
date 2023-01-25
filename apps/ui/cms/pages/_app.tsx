@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import { TamaguiProvider } from 'tamagui';
-import appConfig from '../tamagui.config';
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme';
+import { appConfig } from '@course-explorer-monorepo/ui';
 import React from 'react';
 import '@tamagui/core/reset.css';
 
