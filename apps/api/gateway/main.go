@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"course-explorer-monorepo/libs/api"
+	"fmt"
+)
 
 func Hello(name string) string {
 	result := "Hello " + name
@@ -8,5 +11,5 @@ func Hello(name string) string {
 }
 
 func main() {
-	fmt.Println(Hello("gateway-api"))
+	fmt.Println(api.Api("Hello"))
 }
