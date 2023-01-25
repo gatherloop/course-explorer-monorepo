@@ -46,6 +46,12 @@
           "quiet": true
         }
       }
+    },
+    "gen-contract": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx @openapitools/openapi-generator-cli generate -i libs/api/contract.yaml -g typescript-fetch -o libs/ui/__generated__/contract"
+      }
     }
   }
 }

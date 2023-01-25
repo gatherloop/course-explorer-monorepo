@@ -9,6 +9,12 @@
     },
     "lint": {
       "executor": "@nx-go/nx-go:lint"
+    },
+    "gen-contract": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx @openapitools/openapi-generator-cli generate -i libs/api/contract.yaml -g go -o libs/api/__generated__/contract"
+      }
     }
   },
   "tags": []

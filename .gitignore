@@ -43,3 +43,6 @@ Thumbs.db
 
 # Tamagui
 .tamagui
+
+# generated
+__generated__
