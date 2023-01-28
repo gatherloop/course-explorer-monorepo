@@ -10,6 +10,11 @@
       "implementation": "./src/executors/sync-files/executor",
       "schema": "./src/executors/sync-files/schema.json",
       "description": "sync-files executor"
+    },
+    "prepare-assets": {
+      "implementation": "./src/executors/prepare-assets/executor",
+      "schema": "./src/executors/prepare-assets/schema.json",
+      "description": "prepare-assets executor"
     }
   }
 }

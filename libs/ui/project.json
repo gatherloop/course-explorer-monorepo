@@ -52,6 +52,13 @@
       "options": {
         "command": "npx @openapitools/openapi-generator-cli generate -i libs/api/contract.yaml -g typescript-fetch -o libs/ui/__generated__/contract"
       }
+    },
+    "prepare-assets": {
+      "executor": "@course-explorer-monorepo/plugin:prepare-assets",
+      "options": {
+        "assetsFolder": "libs/ui/src/assets",
+        "outputJson": "libs/ui/__generated__/assets/index.json"
+      }
     }
   }
 }
