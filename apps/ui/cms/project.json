@@ -17,7 +17,11 @@
           "outputPath": "apps/ui/cms"
         },
         "production": {}
-      }
+      },
+      "dependsOn": [
+        { "target": "gen-contract", "projects": "dependencies" },
+        { "target": "sync-assets", "projects": "self" }
+      ]
     },
     "serve": {
       "executor": "@nrwl/next:server",
@@ -35,13 +39,21 @@
           "buildTarget": "ui-cms:build:production",
           "dev": false
         }
-      }
+      },
+      "dependsOn": [
+        { "target": "gen-contract", "projects": "dependencies" },
+        { "target": "sync-assets", "projects": "self" }
+      ]
     },
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
         "buildTarget": "ui-cms:build:production"
-      }
+      },
+      "dependsOn": [
+        { "target": "gen-contract", "projects": "dependencies" },
+        { "target": "sync-assets", "projects": "self" }
+      ]
     },
     "test": {
       "executor": "@nrwl/jest:jest",
@@ -49,21 +61,30 @@
       "options": {
         "jestConfig": "apps/ui/cms/jest.config.ts",
         "passWithNoTests": true
-      }
+      },
+      "dependsOn": [
+        { "target": "gen-contract", "projects": "dependencies" },
+        { "target": "sync-assets", "projects": "self" }
+      ]
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/ui/cms/**/*.{ts,tsx,js,jsx}"]
-      }
+      },
+      "dependsOn": [
+        { "target": "gen-contract", "projects": "dependencies" },
+        { "target": "sync-assets", "projects": "self" }
+      ]
     },
     "sync-assets": {
       "executor": "@course-explorer-monorepo/plugin:sync-files",
       "options": {
         "sourceFolder": "libs/ui/src/assets",
         "targetFolder": "apps/ui/cms/public/assets"
-      }
+      },
+      "dependsOn": [{ "target": "prepare-assets", "projects": "dependencies" }]
     }
   },
   "tags": []

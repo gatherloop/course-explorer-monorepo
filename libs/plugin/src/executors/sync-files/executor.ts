@@ -20,9 +20,6 @@ export default async function runExecutor(
     fs.mkdirpSync(targetFolderAbsolutePath);
   }
 
-  console.log('sourceFolderAbsolutePath', sourceFolderAbsolutePath);
-  console.log('targetFolderAbsolutePath', targetFolderAbsolutePath);
-
   fs.copySync(sourceFolderAbsolutePath, targetFolderAbsolutePath);
 
   return {
