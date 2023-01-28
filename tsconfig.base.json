@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@course-explorer-monorepo/plugin": ["libs/plugin/src/index.ts"],
       "@course-explorer-monorepo/ui": ["libs/ui/src/index.ts"]
     }
   },

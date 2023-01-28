@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "version": 2,
+  "cli": "nx",
+  "title": "SyncFiles executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "sourceFolder": {
+      "type": "string",
+      "description": "source folder"
+    },
+    "targetFolder": {
+      "type": "string",
+      "description": "target folder"
+    }
+  },
+  "required": ["sourceFolder", "targetFolder"]
+}

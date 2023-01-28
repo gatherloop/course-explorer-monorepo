@@ -5,6 +5,7 @@
     "api-content": "apps/api/content",
     "api-gateway": "apps/api/gateway",
     "api-user": "apps/api/user",
+    "plugin": "libs/plugin",
     "ui": "libs/ui",
     "ui-cms": "apps/ui/cms",
     "ui-explorer": "apps/ui/explorer"
