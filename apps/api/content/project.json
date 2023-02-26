@@ -7,15 +7,66 @@
     "build": {
       "executor": "@nx-go/nx-go:build",
       "options": {
-        "outputPath": "dist/apps/api/content",
+        "outputPath": "apps/api/content/dist/",
         "main": "apps/api/content/main.go"
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "gen-contract",
+          "projects": "dependencies"
+        }
+      ]
+    },
+    "build-linux": {
+      "executor": "@nx-go/nx-go:build",
+      "options": {
+        "outputPath": "apps/api/content/dist/",
+        "main": "apps/api/content/main.go"
+      },
+      "dependsOn": [
+        {
+          "target": "gen-contract",
+          "projects": "dependencies"
+        }
+      ]
+    },
+    "image-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/api/content",
+        "command": "docker build --platform linux/amd64 -t gatherloop/course-explorer-monorepo-api-content ."
+      },
+      "dependsOn": [
+        {
+          "target": "build-linux",
+          "projects": "self"
+        }
+      ]
+    },
+    "image-push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/api/content",
+        "command": "docker push gatherloop/course-explorer-monorepo-api-content"
+      },
+      "dependsOn": [
+        {
+          "target": "image-build",
+          "projects": "self"
+        }
+      ]
     },
     "serve": {
       "executor": "@nx-go/nx-go:serve",
       "options": {
         "main": "apps/api/content/main.go"
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "gen-contract",
+          "projects": "dependencies"
+        }
+      ]
     },
     "test": {
       "executor": "@nx-go/nx-go:test"

@@ -1,0 +1,40 @@
+name: cd
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Docker Login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build and Push Image
+        run: |
+          npm install
+
+          npx nx image-push ui-cms
+          npx nx image-push ui-explorer
+
+          npx nx gen-contract api
+          npx nx image-push api-content
+          npx nx image-push api-gateway
+          npx nx image-push api-user
+      - name: Deploy Using SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /root/Deployments/course-explorer-monorepo
+            git pull origin main
+            docker compose stop
+            docker compose pull
+            docker compose up -d

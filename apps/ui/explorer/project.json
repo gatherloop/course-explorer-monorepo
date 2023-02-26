@@ -10,7 +10,7 @@
       "defaultConfiguration": "production",
       "options": {
         "root": "apps/ui/explorer",
-        "outputPath": "dist/apps/ui/explorer"
+        "outputPath": "apps/ui/explorer/dist"
       },
       "configurations": {
         "development": {
@@ -85,6 +85,22 @@
         "targetFolder": "apps/ui/explorer/public/assets"
       },
       "dependsOn": [{ "target": "prepare-assets", "projects": "dependencies" }]
+    },
+    "image-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/ui/explorer",
+        "command": "docker build --platform linux/amd64 -t gatherloop/course-explorer-monorepo-ui-explorer ."
+      },
+      "dependsOn": [{ "target": "build", "projects": "self" }]
+    },
+    "image-push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/ui/explorer",
+        "command": "docker push gatherloop/course-explorer-monorepo-ui-explorer"
+      },
+      "dependsOn": [{ "target": "image-build", "projects": "self" }]
     }
   },
   "tags": []
