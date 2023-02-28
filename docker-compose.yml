@@ -22,12 +22,12 @@ services:
     image: gatherloop/course-explorer-monorepo-api-content
     container_name: course-explorer-monorepo-api-content
     environment:
-      - HOST=course-explorer-monorepo-database
-      - PORT=6000
-      - USERNAME=root
-      - PASSWORD=root
-      - DATABASE_NAME=course-explorer-monorepo
-      - SERVER_PORT=3000
+      - DB_HOST=course-explorer-monorepo-database
+      - DB_PORT=6000
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - DB_NAME=course-explorer-monorepo
+      - PORT=3000
     ports:
       - 6100:3000
     depends_on:
@@ -40,12 +40,12 @@ services:
     image: gatherloop/course-explorer-monorepo-api-gateway
     container_name: course-explorer-monorepo-api-gateway
     environment:
-      - HOST=course-explorer-monorepo-database
-      - PORT=6000
-      - USERNAME=root
-      - PASSWORD=root
-      - DATABASE_NAME=course-explorer-monorepo
-      - SERVER_PORT=3000
+      - DB_HOST=course-explorer-monorepo-database
+      - DB_PORT=6000
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - DB_NAME=course-explorer-monorepo
+      - PORT=3000
     ports:
       - 6101:3000
     depends_on:
@@ -58,12 +58,12 @@ services:
     image: gatherloop/course-explorer-monorepo-api-user
     container_name: course-explorer-monorepo-api-user
     environment:
-      - HOST=course-explorer-monorepo-database
-      - PORT=6000
-      - USERNAME=root
-      - PASSWORD=root
-      - DATABASE_NAME=course-explorer-monorepo
-      - SERVER_PORT=3000
+      - DB_HOST=course-explorer-monorepo-database
+      - DB_PORT=6000
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+      - DB_NAME=course-explorer-monorepo
+      - PORT=3000
     ports:
       - 6102:3000
     depends_on:
