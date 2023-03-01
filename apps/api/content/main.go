@@ -1,7 +1,7 @@
 package main
 
 import (
-	"course-explorer-monorepo/libs/api/utils"
+	"course-explorer-monorepo/libs/api/middlewares"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -72,7 +72,7 @@ func main() {
 
 	}).Methods("POST")
 
-	muxWithMiddlewares := utils.NewCorsMiddleware(mux.ServeHTTP)
+	muxWithMiddlewares := middlewares.NewCorsMiddleware(mux.ServeHTTP)
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), muxWithMiddlewares))
 }
