@@ -40,11 +40,6 @@ services:
     image: gatherloop/course-explorer-monorepo-api-gateway
     container_name: course-explorer-monorepo-api-gateway
     environment:
-      - DB_HOST=course-explorer-monorepo-database
-      - DB_PORT=6000
-      - DB_USERNAME=root
-      - DB_PASSWORD=root
-      - DB_NAME=course-explorer-monorepo
       - PORT=3000
     ports:
       - 6101:3000
