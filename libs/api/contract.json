@@ -6,74 +6,18 @@
     "description": "see api_link"
   },
   "paths": {
-    "/contacts": {
+    "/courses": {
       "get": {
-        "description": "get all contacts list",
-        "tags": ["Contact"],
-        "operationId": "getContacts",
+        "description": "get courses list",
+        "tags": ["Courses"],
+        "operationId": "getCoursesList",
         "responses": {
           "200": {
-            "description": "success get contact list data",
+            "description": "success get courses list data",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetContactsList"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "unauthorized user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "create contact data",
-        "tags": ["Contact"],
-        "operationId": "createContact",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateContactRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "success create contact data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NoDataResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "create contact error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "$ref": "#/components/schemas/GetCoursesListResponse"
                 }
               }
             }
@@ -101,106 +45,18 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/instructors": {
       "get": {
-        "description": "get contact by id",
-        "tags": ["Contact"],
-        "operationId": "getContactByID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "integer"
-            },
-            "required": true,
-            "description": "contact id"
-          }
-        ],
+        "description": "get instructor list",
+        "tags": ["Instructor"],
+        "operationId": "getInstructorsList",
         "responses": {
           "200": {
-            "description": "success get contact by id",
+            "description": "success get instructor list data",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetContactByID"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "error get contact by id",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "unauthorized user",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "description": "update contact data by id",
-        "tags": ["Contact"],
-        "operationId": "updateContactByID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "schema": {
-              "type": "integer"
-            },
-            "required": true,
-            "description": "contact id"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateContactRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success create contact data",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NoDataResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "create contact error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "$ref": "#/components/schemas/GetCoursesListResponse"
                 }
               }
             }
@@ -231,9 +87,112 @@
   },
   "components": {
     "schemas": {
-      "NoDataResponse": {
+      "GetCoursesListResponse": {
+        "type": "object",
+        "required": [
+          "data",
+          "message"
+        ],
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetCoursesList"
+            }
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "GetCoursesList": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "description",
+          "thumbnail",
+          "instructor"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "string"
+          },
+          "instructor": {
+            "type": "object",
+            "$ref": "#/components/schemas/Instructor"
+          }
+        }
+      },
+      "GetInstructorListResponse": {
         "type": "object",
         "required": ["data", "message"],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Instructor"
+            }
+          }
+        }
+      },
+      "Instructor": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "role",
+          "companyName",
+          "profilePictureURL"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "profilePictureURL": {
+            "type": "string"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "githubURL": {
+            "type": "string"
+          },
+          "linkedinURL": {
+            "type": "string"
+          },
+          "twitterURL": {
+            "type": "string"
+          }
+        }
+      },
+      "NoDataResponse": {
+        "type": "object",
+        "required": [
+          "data",
+          "message"
+        ],
         "properties": {
           "data": {
             "type": null
@@ -245,89 +204,16 @@
       },
       "ErrorResponse": {
         "type": "object",
-        "required": ["data", "message"],
+        "required": [
+          "data",
+          "message"
+        ],
         "properties": {
           "data": {
             "type": null
           },
           "message": {
             "type": "string"
-          }
-        }
-      },
-      "CreateContactRequest": {
-        "type": "object",
-        "required": ["name", "phone", "profilePictureURL"],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "profilePictureURL": {
-            "type": "string"
-          }
-        }
-      },
-      "GetContactsList": {
-        "type": "object",
-        "required": ["message", "data"],
-        "properties": {
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Contact"
-            }
-          }
-        }
-      },
-      "Contact": {
-        "type": "object",
-        "required": ["id", "name", "phone", "profilePictureURL"],
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "name": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "profilePictureURL": {
-            "type": "string"
-          }
-        }
-      },
-      "UpdateContactRequest": {
-        "type": "object",
-        "required": ["name", "phone", "profilePictureURL"],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "profilePictureURL": {
-            "type": "string"
-          }
-        }
-      },
-      "GetContactByID": {
-        "type": "object",
-        "required": ["message", "data"],
-        "properties": {
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "object",
-            "$ref": "#/components/schemas/Contact"
           }
         }
       }
