@@ -6,9 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 	"io"
 	"log"
 	"net/http"
+	"os"
 )
 
 type Response struct {
@@ -16,8 +18,15 @@ type Response struct {
 	Data    interface{} `json:"data"`
 }
 
-var mapRouting = map[string]string{
-	"/hello": "http://localhost:3000/hello", // sesuai port dari servicenya
+var mapRouting map[string]string
+
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
+
+	mapRouting = initMapRouting()
 }
 
 func main() {
@@ -29,7 +38,13 @@ func main() {
 
 	muxWithMiddlewares := middlewares.NewCorsMiddleware(mux.ServeHTTP)
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", "5000"), muxWithMiddlewares))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), muxWithMiddlewares))
+}
+
+func initMapRouting() map[string]string {
+	return map[string]string{
+		"/hello": fmt.Sprintf("%s/hello", os.Getenv("CONTENT_API_BASE_URL")),
+	}
 }
 
 func handleFunction(writer http.ResponseWriter, request *http.Request) {
