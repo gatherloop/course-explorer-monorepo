@@ -23,16 +23,16 @@ var mapRouting = map[string]string{
 func main() {
 	mux := mux.NewRouter()
 
-	mux.HandleFunc("/hello", handleFuntion).Methods("GET")
+	mux.HandleFunc("/hello", handleFunction).Methods("GET")
 
-	mux.HandleFunc("/hello", handleFuntion).Methods("POST")
+	mux.HandleFunc("/hello", handleFunction).Methods("POST")
 
 	muxWithMiddlewares := utils.NewCorsMiddleware(mux.ServeHTTP)
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", "5000"), muxWithMiddlewares))
 }
 
-func handleFuntion(writer http.ResponseWriter, request *http.Request) {
+func handleFunction(writer http.ResponseWriter, request *http.Request) {
 	url := mapRouting[request.RequestURI]
 	statusCode := http.StatusInternalServerError
 
