@@ -49,19 +49,18 @@ func handleFuntion(writer http.ResponseWriter, request *http.Request) {
 
 func newHTTPRequest(request *http.Request, method, url string) (*http.Response, Response) {
 	var (
-		err            error
+		res            Response
+		requestBody    io.Reader
 		client         = &http.Client{}
 		data, body     map[string]interface{}
-		requestBody    io.Reader
 		methodWithBody = map[string]bool{
 			"POST": true,
 			"PUT":  true,
 		}
-		res Response
 	)
 
 	if methodWithBody[method] {
-		err = json.NewDecoder(request.Body).Decode(&body)
+		err := json.NewDecoder(request.Body).Decode(&body)
 		if err != nil {
 			res.Message = err.Error()
 			return nil, res
