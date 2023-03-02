@@ -116,7 +116,7 @@
         ],
         "properties": {
           "id": {
-            "type": "number"
+            "type": "integer"
           },
           "title": {
             "type": "string"
@@ -159,7 +159,7 @@
         ],
         "properties": {
           "id": {
-            "type": "number"
+            "type": "integer"
           },
           "name": {
             "type": "string"
