@@ -18,15 +18,21 @@ type Response struct {
 	Data    interface{} `json:"data"`
 }
 
+type config struct {
+	ContentAPIBaseURL string
+}
+
 var mapRouting map[string]string
 
 func init() {
 	err := godotenv.Load()
 	if err != nil {
-		panic(err)
+		log.Println("err load env", err)
 	}
 
-	mapRouting = initMapRouting()
+	var cfg = getConfigBaseURL()
+
+	mapRouting = initMapRouting(cfg)
 }
 
 func main() {
@@ -38,12 +44,18 @@ func main() {
 
 	muxWithMiddlewares := middlewares.NewCorsMiddleware(mux.ServeHTTP)
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), muxWithMiddlewares))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), muxWithMiddlewares))
 }
 
-func initMapRouting() map[string]string {
+func getConfigBaseURL() config {
+	return config{
+		ContentAPIBaseURL: os.Getenv("CONTENT_API_BASE_URL"),
+	}
+}
+
+func initMapRouting(cfg config) map[string]string {
 	return map[string]string{
-		"/hello": fmt.Sprintf("%s/hello", os.Getenv("CONTENT_API_BASE_URL")),
+		"/hello": fmt.Sprintf("%s/hello", cfg.ContentAPIBaseURL),
 	}
 }
 

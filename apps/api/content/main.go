@@ -15,7 +15,7 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		panic(err)
+		log.Println("err load env", err)
 	}
 
 	mux := mux.NewRouter()
@@ -74,5 +74,5 @@ func main() {
 
 	muxWithMiddlewares := middlewares.NewCorsMiddleware(mux.ServeHTTP)
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("SERVER_PORT")), muxWithMiddlewares))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), muxWithMiddlewares))
 }
