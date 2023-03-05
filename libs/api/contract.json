@@ -169,7 +169,7 @@
         },
         "responses": {
           "200": {
-            "description": "create user data success",
+            "description": "update user data success",
             "content": {
               "application/json": {
                 "schema": {
@@ -179,7 +179,7 @@
             }
           },
           "400": {
-            "description": "create user data error",
+            "description": "update user data error",
             "content": {
               "application/json": {
                 "schema": {
