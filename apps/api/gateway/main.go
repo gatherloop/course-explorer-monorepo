@@ -2,24 +2,22 @@ package main
 
 import (
 	"bytes"
+	"course-explorer-monorepo/apps/api/gateway/config"
 	"course-explorer-monorepo/libs/api/middlewares"
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 	"io"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 type Response struct {
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
-}
-
-type config struct {
-	ContentAPIBaseURL string
 }
 
 var mapRouting map[string]string
@@ -30,7 +28,7 @@ func init() {
 		log.Println("err load env", err)
 	}
 
-	var cfg = getConfigBaseURL()
+	var cfg = config.Get()
 
 	mapRouting = initMapRouting(cfg)
 }
@@ -47,15 +45,9 @@ func main() {
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), muxWithMiddlewares))
 }
 
-func getConfigBaseURL() config {
-	return config{
-		ContentAPIBaseURL: os.Getenv("CONTENT_API_BASE_URL"),
-	}
-}
-
-func initMapRouting(cfg config) map[string]string {
+func initMapRouting(cfg config.Config) map[string]string {
 	return map[string]string{
-		"/hello": fmt.Sprintf("%s/hello", cfg.ContentAPIBaseURL),
+		"/hello": fmt.Sprintf("%s/hello", cfg.Api.ContentAPIURL),
 	}
 }
 

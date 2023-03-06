@@ -3,11 +3,12 @@ package response
 import (
 	"encoding/json"
 	"net/http"
-	"starter-monorepo/libs/api/domain"
+
+	contract "github.com/gatherloop/course-explorer-monorepo"
 )
 
 func Error(w http.ResponseWriter, httpCode int, data interface{}, message string) {
-	var errorResponse domain.ErrorResponse
+	var errorResponse contract.ErrorResponse
 	errorResponse.Data = data
 	errorResponse.Message = message
 
