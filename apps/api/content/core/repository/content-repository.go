@@ -4,37 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
-	"os"
+
+	course "course-explorer-monorepo/apps/api/content/core/entity"
 
 	domain "github.com/gatherloop/course-explorer-monorepo"
-	"github.com/joho/godotenv"
 )
-
-var baseURL = "https://www.googleapis.com/youtube/v3"
-var key = os.Getenv("API_KEY")
-var channelId = os.Getenv("CHANNEL_ID")
-
-type GetResponse struct{
-  Items []GetPlaylist `json:"items"`
-}
-
-type GetPlaylist struct{
-  Snippet GetPlaylistData `json:"snippet"`
-}
-
-type GetPlaylistData struct{
-  Title string `json:"title"`
-  Description string `json:"description"`
-  Thumbnails Thumbnails `json:"thumbnails"`
-}
-
-type Thumbnails struct{
-  Default Default `json:"default"`
-}
-
-type Default struct{
-  Url string `json:"url"`
-}
 
 type contentRepository struct{}
 
@@ -47,13 +21,11 @@ func NewContentRepository() ContentRepository{
 }
 
 func (repo *contentRepository) GetCoursesList(ctx context.Context) ([]domain.GetCoursesList, error){
-  godotenv.Load()
-
-  var getResponse GetResponse
+  var getResponse course.GetResponse
   var courses []domain.GetCoursesList
 
   var client = &http.Client{}
-  request, err := http.NewRequest("GET", baseURL+"/playlists?key="+key+"&part=snippet&channelId="+channelId+"&maxResults=30", nil)
+  request, err := http.NewRequest("GET", course.BaseURL+"/playlists?key="+course.Key+"&part=snippet&channelId="+course.ChannelId+"&maxResults=30", nil)
 
   if err != nil {
     return []domain.GetCoursesList{}, err
