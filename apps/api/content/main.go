@@ -1,9 +1,9 @@
 package main
 
 import (
-	"course-explorer-monorepo/apps/api/content/core/handler"
 	"course-explorer-monorepo/apps/api/content/core/module"
 	"course-explorer-monorepo/apps/api/content/core/repository"
+	"course-explorer-monorepo/apps/api/content/handler"
 	"course-explorer-monorepo/libs/api/middlewares"
 	"encoding/json"
 	"fmt"

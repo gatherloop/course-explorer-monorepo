@@ -31,4 +31,3 @@ func (c *contentHandler) GetContentList(w http.ResponseWriter, r *http.Request){
   getCoursesListResponse.SetData(courses)
   response.Success(w, http.StatusOK, getCoursesListResponse)
 }
-package handler
