@@ -41,6 +41,7 @@ services:
     container_name: course-explorer-monorepo-api-gateway
     environment:
       - PORT=3000
+      - CONTENT_API_URL=https://course-explorer-api-content.gatherloop.co
     ports:
       - 6101:3000
     depends_on:
