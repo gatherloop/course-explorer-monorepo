@@ -1,15 +1,21 @@
 package main
 
 import (
+	"course-explorer-monorepo/apps/api/content/core/module"
+	"course-explorer-monorepo/apps/api/content/core/repository"
+	"course-explorer-monorepo/apps/api/content/handler"
 	"course-explorer-monorepo/libs/api/middlewares"
+	"course-explorer-monorepo/libs/api/utils/config"
+	"course-explorer-monorepo/libs/api/utils/database"
 	"encoding/json"
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/joho/godotenv"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -71,6 +77,18 @@ func main() {
 		}
 
 	}).Methods("POST")
+
+	cfg := config.Get()
+
+	db := database.Init(cfg)
+
+	//Instructors
+	instructorRepo := repository.NewInstructorRepository(db)
+	instructorUsecase := module.NewInstructorUsecase(instructorRepo)
+	instructorHandler := handler.NewInstructorHandler(instructorUsecase)
+
+	//Instructors Routing
+	mux.HandleFunc("/instructors", instructorHandler.GetInstructorsList).Methods("GET")
 
 	muxWithMiddlewares := middlewares.NewCorsMiddleware(mux.ServeHTTP)
 
