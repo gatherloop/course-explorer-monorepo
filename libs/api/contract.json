@@ -85,6 +85,53 @@
       }
     },
     "/users": {
+      "get": {
+        "description": "get user data",
+        "tags": ["Users"],
+        "operationId": "getUsers",
+        "responses": {
+          "200": {
+            "description": "get user data success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetUserListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "create user data error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "description": "create user data",
         "tags": ["Users"],
@@ -110,7 +157,7 @@
             }
           },
           "400": {
-            "description": "create user data error",
+            "description": "get user data error",
             "content": {
               "application/json": {
                 "schema": {
@@ -331,6 +378,24 @@
           },
           "role": {
             "type": "string"
+          }
+        }
+      },
+      "GetUserListResponse": {
+        "type": "object",
+        "required": [
+          "message",
+          "data"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
           }
         }
       },
