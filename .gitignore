@@ -49,3 +49,9 @@ Thumbs.db
 # generated
 __generated__
 public
+<<<<<<< HEAD
+=======
+
+#env
+.env
+>>>>>>> 0edc667a4b081490d7f5b92575975ff0d8e591f0

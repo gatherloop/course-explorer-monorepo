@@ -5,6 +5,8 @@ import (
 	"course-explorer-monorepo/apps/api/content/core/repository"
 	"course-explorer-monorepo/apps/api/content/handler"
 	"course-explorer-monorepo/libs/api/middlewares"
+	"course-explorer-monorepo/libs/api/utils/config"
+	"course-explorer-monorepo/libs/api/utils/database"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -76,9 +78,21 @@ func main() {
 
 	}).Methods("POST")
 
-	contentRepo := repository.NewContentRepository()
+	cfg := config.Get()
+
+	db := database.Init(cfg)
+
+	//Instructors
+	instructorRepo := repository.NewInstructorRepository(db)
+	instructorUsecase := module.NewInstructorUsecase(instructorRepo)
+	instructorHandler := handler.NewInstructorHandler(instructorUsecase)
+
+  contentRepo := repository.NewContentRepository()
 	contentUsecase := module.NewContentUsecase(contentRepo)
 	contentHandler := handler.NewContentHandler(contentUsecase)
+
+	//Instructors Routing
+	mux.HandleFunc("/instructors", instructorHandler.GetInstructorsList).Methods("GET")
 
   mux.HandleFunc("/courses", contentHandler.GetContentList).Methods("GET")
 
