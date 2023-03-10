@@ -4,7 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	contract "github.com/gatherloop/course-explorer-monorepo"
+	domain "github.com/gatherloop/course-explorer-monorepo"
+
 )
 
 func Error(w http.ResponseWriter, httpCode int, data interface{}, message string) {
