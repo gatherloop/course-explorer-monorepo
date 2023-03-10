@@ -72,6 +72,7 @@ services:
     image: gatherloop/course-explorer-monorepo-ui-cms
     container_name: course-explorer-monorepo-ui-cms
     environment:
+      - PORT=6200
       - API_URL=https://gw-course-explorer.gatherloop.co
     ports:
       - 6200:3000
@@ -82,6 +83,7 @@ services:
     image: gatherloop/course-explorer-monorepo-ui-explorer
     container_name: course-explorer-monorepo-ui-explorer
     environment:
+      - PORT=6201
       - API_URL=https://gw-course-explorer.gatherloop.co
     ports:
       - 6201:3000
