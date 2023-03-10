@@ -2,7 +2,7 @@ package entity
 
 import "os"
 
-var BaseURL = "https://www.googleapis.com/youtube/v3"
+var BaseURL = os.Getenv("BASE_URL")
 var Key = os.Getenv("API_KEY")
 var ChannelId = os.Getenv("CHANNEL_ID")
 
