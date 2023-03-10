@@ -22,9 +22,6 @@ func NewInstructorRepository(db *gorm.DB) InstructorRepository {
 func (i *instructorRepository) GetInstructorsList(ctx context.Context) ([]domain.Instructor, error) {
 	var InstructorList []domain.Instructor
 	err := i.db.Find(&InstructorList).Error
-	if err != nil {
-		return InstructorList, err
-	}
-	return InstructorList, nil
+	return InstructorList, err
 
 }
