@@ -87,8 +87,14 @@ func main() {
 	instructorUsecase := module.NewInstructorUsecase(instructorRepo)
 	instructorHandler := handler.NewInstructorHandler(instructorUsecase)
 
+  contentRepo := repository.NewContentRepository()
+	contentUsecase := module.NewContentUsecase(contentRepo)
+	contentHandler := handler.NewContentHandler(contentUsecase)
+
 	//Instructors Routing
 	mux.HandleFunc("/instructors", instructorHandler.GetInstructorsList).Methods("GET")
+
+  mux.HandleFunc("/courses", contentHandler.GetContentList).Methods("GET")
 
 	muxWithMiddlewares := middlewares.NewCorsMiddleware(mux.ServeHTTP)
 

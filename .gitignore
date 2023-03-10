@@ -1,5 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+/apps/api/content/.env
+
 # compiled output
 dist
 /tmp
@@ -47,6 +49,9 @@ Thumbs.db
 # generated
 __generated__
 public
+<<<<<<< HEAD
+=======
 
 #env
 .env
+>>>>>>> 0edc667a4b081490d7f5b92575975ff0d8e591f0

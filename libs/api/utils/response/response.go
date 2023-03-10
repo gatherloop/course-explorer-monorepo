@@ -5,11 +5,10 @@ import (
 	"net/http"
 
 	domain "github.com/gatherloop/course-explorer-monorepo"
-
 )
 
 func Error(w http.ResponseWriter, httpCode int, data interface{}, message string) {
-	var errorResponse contract.ErrorResponse
+	var errorResponse domain.ErrorResponse
 	errorResponse.Data = data
 	errorResponse.Message = message
 
