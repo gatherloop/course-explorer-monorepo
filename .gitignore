@@ -3,7 +3,7 @@
 /apps/api/content/.env
 
 # compiled output
-/dist
+dist
 /tmp
 /out-tsc
 
